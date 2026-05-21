@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<!--
+/**
+ * =================================================================
+ * PORTFOLIO ARCHITECTURE & CORE LOGIC
+ * =================================================================
+ * Copyright (c) 2026 Benjamin Ticona Mamani. All rights reserved.
+ * Verified Owner: btm-sys
+ * * NOTICE: Permission is hereby granted to view and audit this code 
+ * for educational and recruitment purposes. Unauthorized distribution, 
+ * modification for commercial use, or replication of this source code 
+ * without credit to the original author is strictly prohibited.
+ * =================================================================
+ */
+-->
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portafolio profesional de Benjamin - Estudiante de Informática enfocado en Redes y Ciberseguridad">
+    <title>Benjamin | Redes & Ciberseguridad</title>
+    
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Custom Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cyber: {
+                            black: '#0a0a0a',
+                            dark: '#121212',
+                            darker: '#0d0d0d',
+                            green: '#00ff88',
+                            blue: '#00d4ff',
+                            corporate: '#1e40af',
+                            cyan: '#00ffff',
+                            purple: '#a855f7',
+                            gray: '#1a1a1a'
+                        }
+                    },
+                    fontFamily: {
+                        mono: ['"Fira Code"', 'monospace'],
+                        sans: ['Inter', 'system-ui', 'sans-serif']
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 3s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate'
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' }
+                        },
+                        glow: {
+                            'from': { boxShadow: '0 0 5px #00ff88, 0 0 10px #00ff88' },
+                            'to': { boxShadow: '0 0 20px #00ff88, 0 0 30px #00ff88' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- DM Sans Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-cyber-black text-gray-100 antialiased overflow-x-hidden" style="font-family: 'DM Sans', sans-serif;">
+    
+    <!-- Cybersecurity Preloader -->
+    <div id="preloader" class="fixed inset-0 bg-black z-[10000] flex items-center justify-center">
+        <div class="max-w-[400px] w-full text-center px-4">
+            <div id="preloader-text" class="font-mono text-cyber-green text-lg mb-4 min-h-[24px]"></div>
+            <div class="w-48 h-1 bg-gray-800 rounded-full overflow-hidden mx-auto">
+                <div id="preloader-bar" class="h-full bg-cyber-green transition-all duration-300" style="width: 0%"></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed top-20 right-5 z-[9999] hidden opacity-0 pointer-events-none translate-x-full transition-all duration-500">
+        <div class="bg-[#0b0f19] border border-cyber-green rounded-lg px-5 py-4 shadow-lg shadow-cyber-green/30 flex items-center gap-3" style="min-width: 300px;">
+            <i data-lucide="check-circle" class="w-6 h-6 text-cyber-green"></i>
+            <span id="toast-message" class="text-white text-sm" style="font-family: 'DM Sans', sans-serif;"></span>
+        </div>
+    </div>
+    
+    <!-- Navbar -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-cyber-black/80 backdrop-blur-md border-b border-cyber-green/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <a href="#hero" class="flex items-center space-x-3 group">
+                    <i data-lucide="shield-check" class="w-8 h-8 text-cyber-green group-hover:animate-pulse"></i>
+                    <span class="text-xl font-bold text-white group-hover:text-cyber-green transition-colors">BENJAMIN</span>
+                    <span class="text-gray-500">|</span>
+                    <span class="text-sm font-mono text-cyber-green">SECURED_PROFILE</span>
+                    <div class="w-2 h-2 bg-cyber-green rounded-full animate-pulse"></div>
+                </a>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#about" class="nav-link text-gray-300 hover:text-cyber-green transition-colors">Sobre mí</a>
+                    <a href="#skills" class="nav-link text-gray-300 hover:text-cyber-green transition-colors">Skills</a>
+                    <a href="#certifications" class="nav-link text-gray-300 hover:text-cyber-green transition-colors">Certificaciones</a>
+                    <a href="#projects" class="nav-link text-gray-300 hover:text-cyber-green transition-colors">Proyectos</a>
+                    <a href="#contact" class="px-4 py-2 bg-cyber-green/10 border border-cyber-green text-cyber-green rounded-lg hover:bg-cyber-green hover:text-cyber-black transition-all duration-300">
+                        Contacto
+                    </a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden p-2 text-gray-300 hover:text-cyber-green transition-colors">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-cyber-dark border-t border-cyber-green/20">
+            <div class="px-4 py-4 space-y-3">
+                <a href="#about" class="block text-gray-300 hover:text-cyber-green transition-colors py-2">Sobre mí</a>
+                <a href="#skills" class="block text-gray-300 hover:text-cyber-green transition-colors py-2">Skills</a>
+                <a href="#certifications" class="block text-gray-300 hover:text-cyber-green transition-colors py-2">Certificaciones</a>
+                <a href="#projects" class="block text-gray-300 hover:text-cyber-green transition-colors py-2">Proyectos</a>
+                <a href="#contact" class="block px-4 py-2 bg-cyber-green/10 border border-cyber-green text-cyber-green rounded-lg hover:bg-cyber-green hover:text-cyber-black transition-all duration-300 text-center">
+                    Contacto
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="min-h-screen flex items-center justify-center relative overflow-hidden pt-16">
+        <!-- Animated Background -->
+        <div class="absolute inset-0 bg-gradient-to-br from-cyber-black via-cyber-dark to-cyber-darker"></div>
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMwMGZmODgiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PHBhdGggZD0iTTM2IDM0djItaDJ2LTJoLTJ6bTAgNHYyaDJ2LTJoLTJ6bS0yLTR2Mmgydi0yaC0yem0wIDR2Mmgydi0yaC0yeiIvPjwvZz48L2c+PC9zdmc+')] opacity-20"></div>
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-cyber-green/10 rounded-full blur-3xl animate-pulse-slow"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyber-blue/10 rounded-full blur-3xl animate-pulse-slow" style="animation-delay: 1s;"></div>
+        
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto">
+            <div class="mb-6 animate-float">
+                <div class="inline-flex items-center justify-center w-32 h-32 rounded-full bg-gradient-to-br from-cyber-green to-cyber-corporate p-[3px] hover:p-[4px] transition-all duration-300 avatar-frame">
+                    <div class="w-full h-full rounded-full bg-cyber-dark flex items-center justify-center overflow-hidden">
+                        <img src="avatar.png" alt="Benjamin Avatar" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+            
+            <h1 class="text-4xl sm:text-5xl md:text-7xl font-bold mb-4">
+                <span class="text-white">Hola, soy </span>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyber-green to-cyber-blue">Benjamin</span>
+            </h1>
+            
+            <p class="text-xl sm:text-2xl text-gray-400 mb-6 font-mono">
+                <span class="text-cyber-green">&lt;</span>
+                Estudiante de Informática
+                <span class="text-cyber-green">/&gt;</span>
+            </p>
+            
+            <p class="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
+                Enfocado en <span class="text-cyber-green font-semibold">Redes</span> y <span class="text-cyber-blue font-semibold">Ciberseguridad</span>
+            </p>
+            
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#projects" class="group px-8 py-3 bg-gradient-to-r from-cyber-green to-cyber-blue text-cyber-black font-semibold rounded-lg hover:shadow-lg hover:shadow-cyber-green/30 transition-all duration-300 flex items-center gap-2">
+                    Ver Proyectos
+                    <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+                </a>
+                <a href="CV_Benjamin_Ticona.pdf" target="_blank" class="px-8 py-3 border border-cyber-corporate text-cyber-corporate rounded-lg hover:bg-cyber-corporate/10 transition-all duration-300 flex items-center gap-2">
+                    <i data-lucide="download" class="w-5 h-5"></i>
+                    Descargar CV
+                </a>
+                <a href="#contact" class="px-8 py-3 border border-cyber-green text-cyber-green rounded-lg hover:bg-cyber-green/10 transition-all duration-300 flex items-center gap-2">
+                    <i data-lucide="mail" class="w-5 h-5"></i>
+                    Contactar
+                </a>
+            </div>
+            
+            <!-- Scroll Indicator -->
+           
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold mb-4">
+                    <span class="text-cyber-green">&lt;</span> Sobre mí <span class="text-cyber-green">/&gt;</span>
+                </h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-cyber-green to-cyber-blue mx-auto"></div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <p class="text-gray-300 text-lg leading-relaxed">
+                        Soy estudiante de Informática con una fuerte pasión por la <span class="text-cyber-green font-semibold">infraestructura de redes</span>, 
+                        <span class="text-cyber-blue font-semibold">sistemas Linux</span> y los fundamentos de <span class="text-cyber-purple font-semibold">ciberseguridad</span>.
+                    </p>
+                    <p class="text-gray-300 text-lg leading-relaxed">
+                        Me especializo en la <span class="text-cyber-green font-semibold">automatización de tareas</span> mediante scripts en Python, 
+                        optimizando procesos y aumentando la eficiencia en entornos técnicos.
+                    </p>
+                    <p class="text-gray-300 text-lg leading-relaxed">
+                        Actualmente, estoy profundizando en el <span class="text-cyber-blue font-semibold">análisis de datos</span> y 
+                        la construcción de <span class="text-cyber-purple font-semibold">laboratorios técnicos prácticos</span> para simular 
+                        escenarios reales de seguridad.
+                    </p>
+                    
+                    <div class="flex flex-wrap gap-3 pt-4">
+                        <span class="px-4 py-2 bg-cyber-green/10 border border-cyber-green/30 text-cyber-green rounded-full text-sm font-mono">
+                            Redes
+                        </span>
+                        <span class="px-4 py-2 bg-cyber-blue/10 border border-cyber-blue/30 text-cyber-blue rounded-full text-sm font-mono">
+                            Linux
+                        </span>
+                        <span class="px-4 py-2 bg-cyber-purple/10 border border-cyber-purple/30 text-cyber-purple rounded-full text-sm font-mono">
+                            Ciberseguridad
+                        </span>
+                        <span class="px-4 py-2 bg-cyber-cyan/10 border border-cyber-cyan/30 text-cyber-cyan rounded-full text-sm font-mono">
+                            Python
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="relative">
+                    <div class="bg-cyber-dark border border-cyber-green/30 rounded-2xl p-6 relative overflow-hidden">
+                        <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyber-green to-cyber-corporate"></div>
+                        <div class="flex items-center gap-2 mb-4">
+                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                            <span class="text-gray-500 text-sm ml-2 font-mono">terminal@benjamin:~</span>
+                        </div>
+                        <div id="terminal-output" class="font-mono text-sm space-y-2 mb-4 max-h-64 overflow-y-auto">
+                            <p class="text-gray-500">$ whoami</p>
+                            <p class="text-cyber-green">benjamin@cybersec</p>
+                            <p class="text-gray-500">$ cat interests.txt</p>
+                            <p class="text-cyber-blue">- Network Security</p>
+                            <p class="text-cyber-blue">- Penetration Testing</p>
+                            <p class="text-cyber-blue">- Linux Administration</p>
+                            <p class="text-cyber-blue">- Python Automation</p>
+                            <p class="text-gray-500">$ echo "Learning never ends"</p>
+                            <p class="text-cyber-purple">Learning never ends</p>
+                            <p class="text-gray-500 animate-pulse">_</p>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-cyber-green font-mono">$</span>
+                            <input type="text" id="terminal-input" class="flex-1 bg-transparent border-none outline-none text-white font-mono text-sm" placeholder="Escribe un comando (help para ayuda)" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="absolute -top-4 -right-4 w-24 h-24 bg-cyber-green/20 rounded-full blur-2xl"></div>
+                    <div class="absolute -bottom-4 -left-4 w-24 h-24 bg-cyber-blue/20 rounded-full blur-2xl"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-cyber-dark relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold mb-4">
+                    <span class="text-cyber-green">&lt;</span> Tecnologías & Skills <span class="text-cyber-green">/&gt;</span>
+                </h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-cyber-green to-cyber-blue mx-auto"></div>
+            </div>
+            
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Lenguajes -->
+                <div class="skill-card bg-cyber-gray border border-cyber-green/20 rounded-xl p-6 hover:border-cyber-green/50 transition-all duration-300 hover:transform hover:scale-105 group">
+                    <div class="flex items-center gap-3 mb-4">
+                        <i data-lucide="code-2" class="w-8 h-8 text-cyber-green group-hover:animate-pulse"></i>
+                        <h3 class="text-xl font-semibold text-white">Lenguajes</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-cyber-green/10 text-cyber-green rounded-lg text-sm">Python</span>
+                        <span class="px-3 py-1 bg-cyber-green/10 text-cyber-green rounded-lg text-sm">JavaScript</span>
+                        <span class="px-3 py-1 bg-cyber-green/10 text-cyber-green rounded-lg text-sm">PHP</span>
+                        <span class="px-3 py-1 bg-cyber-green/10 text-cyber-green rounded-lg text-sm">HTML</span>
+                        <span class="px-3 py-1 bg-cyber-green/10 text-cyber-green rounded-lg text-sm">CSS</span>
+                    </div>
+                </div>
+                
+                <!-- Frameworks -->
+                <div class="skill-card bg-cyber-gray border border-cyber-blue/20 rounded-xl p-6 hover:border-cyber-blue/50 transition-all duration-300 hover:transform hover:scale-105 group">
+                    <div class="flex items-center gap-3 mb-4">
+                        <i data-lucide="layers" class="w-8 h-8 text-cyber-blue group-hover:animate-pulse"></i>
+                        <h3 class="text-xl font-semibold text-white">Frameworks</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-cyber-blue/10 text-cyber-blue rounded-lg text-sm">Laravel</span>
+                        <span class="px-3 py-1 bg-cyber-blue/10 text-cyber-blue rounded-lg text-sm">Node.js</span>
+                        <span class="px-3 py-1 bg-cyber-blue/10 text-cyber-blue rounded-lg text-sm">Bootstrap</span>
+                        <span class="px-3 py-1 bg-cyber-blue/10 text-cyber-blue rounded-lg text-sm">Git</span>
+                        <span class="px-3 py-1 bg-cyber-blue/10 text-cyber-blue rounded-lg text-sm">GitHub</span>
+                    </div>
+                </div>
+                
+                <!-- Bases de Datos -->
+                <div class="skill-card bg-cyber-gray border border-cyber-purple/20 rounded-xl p-6 hover:border-cyber-purple/50 transition-all duration-300 hover:transform hover:scale-105 group">
+                    <div class="flex items-center gap-3 mb-4">
+                        <i data-lucide="database" class="w-8 h-8 text-cyber-purple group-hover:animate-pulse"></i>
+                        <h3 class="text-xl font-semibold text-white">Bases de Datos</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-cyber-purple/10 text-cyber-purple rounded-lg text-sm">MySQL</span>
+                        <span class="px-3 py-1 bg-cyber-purple/10 text-cyber-purple rounded-lg text-sm">SQLite</span>
+                        <span class="px-3 py-1 bg-cyber-purple/10 text-cyber-purple rounded-lg text-sm">SQL Server</span>
+                    </div>
+                </div>
+                
+                <!-- Sistemas -->
+                <div class="skill-card bg-cyber-gray border border-cyber-cyan/20 rounded-xl p-6 hover:border-cyber-cyan/50 transition-all duration-300 hover:transform hover:scale-105 group">
+                    <div class="flex items-center gap-3 mb-4">
+                        <i data-lucide="server" class="w-8 h-8 text-cyber-cyan group-hover:animate-pulse"></i>
+                        <h3 class="text-xl font-semibold text-white">Infraestructura</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-cyber-cyan/10 text-cyber-cyan rounded-lg text-sm">Linux</span>
+                        <span class="px-3 py-1 bg-cyber-cyan/10 text-cyber-cyan rounded-lg text-sm">Cisco</span>
+                        <span class="px-3 py-1 bg-cyber-cyan/10 text-cyber-cyan rounded-lg text-sm">HackTheBox</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certifications" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold mb-4">
+                    <span class="text-cyber-green">&lt;</span> Certificaciones <span class="text-cyber-green">/&gt;</span>
+                </h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-cyber-green to-cyber-blue mx-auto"></div>
+            </div>
+            
+            <!-- Anthropic Certifications -->
+            <div class="mb-12">
+                <h3 class="text-2xl font-semibold text-cyber-green mb-6 flex items-center gap-2">
+                    <i data-lucide="brain-circuit" class="w-6 h-6"></i>
+                    Anthropic
+                </h3>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <a href="https://verify.skilljar.com/c/mzmqpe79kyt8" target="_blank" class="cert-card group bg-cyber-dark border border-cyber-green/30 rounded-xl p-5 hover:border-cyber-green transition-all duration-300 hover:transform hover:scale-105">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 bg-cyber-green/10 rounded-lg flex items-center justify-center">
+                                <span class="text-2xl font-bold text-cyber-green">A</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white group-hover:text-cyber-green transition-colors">Claude 101</h4>
+                                <p class="text-sm text-gray-400">Fundamentos</p>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <a href="https://verify.skilljar.com/c/2pu4kdwns35k" target="_blank" class="cert-card group bg-cyber-dark border border-cyber-green/30 rounded-xl p-5 hover:border-cyber-green transition-all duration-300 hover:transform hover:scale-105">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 bg-cyber-green/10 rounded-lg flex items-center justify-center">
+                                <span class="text-2xl font-bold text-cyber-green">A</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white group-hover:text-cyber-green transition-colors">AI Fluency</h4>
+                                <p class="text-sm text-gray-400">Fluidez en IA</p>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <a href="https://verify.skilljar.com/c/v2bvvycyhwia" target="_blank" class="cert-card group bg-cyber-dark border border-cyber-green/30 rounded-xl p-5 hover:border-cyber-green transition-all duration-300 hover:transform hover:scale-105">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 bg-cyber-green/10 rounded-lg flex items-center justify-center">
+                                <span class="text-2xl font-bold text-cyber-green">A</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white group-hover:text-cyber-green transition-colors">Claude with the API</h4>
+                                <p class="text-sm text-gray-400">Integración API</p>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <a href="https://verify.skilljar.com/c/iaeatoymq9zd" target="_blank" class="cert-card group bg-cyber-dark border border-cyber-green/30 rounded-xl p-5 hover:border-cyber-green transition-all duration-300 hover:transform hover:scale-105">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 bg-cyber-green/10 rounded-lg flex items-center justify-center">
+                                <span class="text-2xl font-bold text-cyber-green">A</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white group-hover:text-cyber-green transition-colors">Claude Code in Action</h4>
+                                <p class="text-sm text-gray-400">Desarrollo con IA</p>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <a href="https://verify.skilljar.com/c/o2xxhefiyzkr" target="_blank" class="cert-card group bg-cyber-dark border border-cyber-green/30 rounded-xl p-5 hover:border-cyber-green transition-all duration-300 hover:transform hover:scale-105">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 bg-cyber-green/10 rounded-lg flex items-center justify-center">
+                                <span class="text-2xl font-bold text-cyber-green">A</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white group-hover:text-cyber-green transition-colors">Intro to MCP</h4>
+                                <p class="text-sm text-gray-400">Model Context Protocol</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Cisco Certification -->
+            <div class="mb-12">
+                <h3 class="text-2xl font-semibold text-cyber-blue mb-6 flex items-center gap-2">
+                    <i data-lucide="network" class="w-6 h-6"></i>
+                    Cisco Networking Academy
+                </h3>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <a href="https://www.credly.com/badges/e867a202-eabd-4ff8-a8b9-f979bd385ff4" target="_blank" class="cert-card group bg-cyber-dark border border-cyber-blue/30 rounded-xl p-5 hover:border-cyber-blue transition-all duration-300 hover:transform hover:scale-105">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 bg-cyber-blue/10 rounded-lg flex items-center justify-center">
+                                <span class="text-2xl font-bold text-cyber-blue">C</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white group-hover:text-cyber-blue transition-colors">Introducción a la Ciberseguridad</h4>
+                                <p class="text-sm text-gray-400">Cybersecurity Essentials</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Idiomas -->
+            <div>
+                <h3 class="text-2xl font-semibold text-cyber-purple mb-6 flex items-center gap-2">
+                    <i data-lucide="languages" class="w-6 h-6"></i>
+                    Idiomas
+                </h3>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <a href="https://cert.efset.org/es/CxqzPT" target="_blank" class="cert-card group bg-cyber-dark border border-cyber-purple/30 rounded-xl p-5 hover:border-cyber-purple transition-all duration-300 hover:transform hover:scale-105">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 bg-cyber-purple/10 rounded-lg flex items-center justify-center">
+                                <span class="text-2xl font-bold text-cyber-purple">EF</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white group-hover:text-cyber-purple transition-colors">Inglés Avanzado C1</h4>
+                                <p class="text-sm text-gray-400">EF SET Certificate</p>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <a href="https://cursa.app/es/mi-certificado/certe5ea88fa7ec85d8f0270470085973616" target="_blank" class="cert-card group bg-cyber-dark border border-cyber-purple/30 rounded-xl p-5 hover:border-cyber-purple transition-all duration-300 hover:transform hover:scale-105">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 bg-cyber-purple/10 rounded-lg flex items-center justify-center">
+                                <span class="text-2xl font-bold text-cyber-purple">C</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white group-hover:text-cyber-purple transition-colors">Italiano Básico A2</h4>
+                                <p class="text-sm text-gray-400">Cursa App</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-cyber-dark relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold mb-4">
+                    <span class="text-cyber-green">&lt;</span> Proyectos & Laboratorios <span class="text-cyber-green">/&gt;</span>
+                </h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-cyber-green to-cyber-blue mx-auto"></div>
+            </div>
+            
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Laravel CRUD -->
+                <a href="https://github.com/elbarto548/laravel-crud" target="_blank" class="project-card group bg-cyber-gray border border-cyber-green/30 rounded-xl overflow-hidden hover:border-cyber-green transition-all duration-300 hover:transform hover:scale-105">
+                    <div class="h-48 bg-gradient-to-br from-cyber-green/20 to-cyber-blue/20 flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMwMGZmODgiIGZpbGwtb3BhY2l0eT0iMC4xIj48cGF0aCBkPSJNMjAgMjBoMnYyaC0yem0wLTRoMnYyaC0yem0wIDhoMnYyaC0yeiIvPjwvZz48L2c+PC9zdmc+')] opacity-30"></div>
+                        <i data-lucide="database" class="w-16 h-16 text-cyber-green group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="px-2 py-1 bg-cyber-green/10 text-cyber-green text-xs rounded-full font-mono">PHP</span>
+                            <span class="px-2 py-1 bg-cyber-blue/10 text-cyber-blue text-xs rounded-full font-mono">Laravel</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-2 group-hover:text-cyber-green transition-colors">Laravel CRUD</h3>
+                        <p class="text-gray-400 text-sm">Aplicación completa de gestión de datos con operaciones CRUD utilizando el framework Laravel.</p>
+                    </div>
+                </a>
+                
+                <!-- Laboratorios de Redes -->
+                <div class="project-card group bg-cyber-gray border border-cyber-blue/30 rounded-xl overflow-hidden hover:border-cyber-blue transition-all duration-300 hover:transform hover:scale-105">
+                    <div class="h-48 bg-gradient-to-br from-cyber-blue/20 to-cyber-purple/20 flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMwMGQ0ZmYiIGZpbGwtb3BhY2l0eT0iMC4xIj48cGF0aCBkPSJNMjAgMjBoMnYyaC0yem0wLTRoMnYyaC0yem0wIDhoMnYyaC0yeiIvPjwvZz48L2c+PC9zdmc+')] opacity-30"></div>
+                        <i data-lucide="network" class="w-16 h-16 text-cyber-blue group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="px-2 py-1 bg-cyber-blue/10 text-cyber-blue text-xs rounded-full font-mono">Cisco</span>
+                            <span class="px-2 py-1 bg-cyber-purple/10 text-cyber-purple text-xs rounded-full font-mono">Networking</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-2 group-hover:text-cyber-blue transition-colors">Laboratorios de Redes</h3>
+                        <p class="text-gray-400 text-sm">Configuraciones y prácticas de redes utilizando equipos Cisco y simuladores de red.</p>
+                    </div>
+                </div>
+                
+                <!-- Laboratorios de Ciberseguridad -->
+                <div class="project-card group bg-cyber-gray border border-cyber-purple/30 rounded-xl overflow-hidden hover:border-cyber-purple transition-all duration-300 hover:transform hover:scale-105">
+                    <div class="h-48 bg-gradient-to-br from-cyber-purple/20 to-cyber-cyan/20 flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNhODU1ZjciIGZpbGwtb3BhY2l0eT0iMC4xIj48cGF0aCBkPSJNMjAgMjBoMnYyaC0yem0wLTRoMnYyaC0yem0wIDhoMnYyaC0yeiIvPjwvZz48L2c+PC9zdmc+')] opacity-30"></div>
+                        <i data-lucide="shield-alert" class="w-16 h-16 text-cyber-purple group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="px-2 py-1 bg-cyber-purple/10 text-cyber-purple text-xs rounded-full font-mono">Security</span>
+                            <span class="px-2 py-1 bg-cyber-cyan/10 text-cyber-cyan text-xs rounded-full font-mono">HackTheBox</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-2 group-hover:text-cyber-purple transition-colors">Laboratorios de Ciberseguridad</h3>
+                        <p class="text-gray-400 text-sm">Prácticas de pentesting, análisis de vulnerabilidades y hardening de sistemas.</p>
+                    </div>
+                </div>
+                
+                <!-- Scripts de Automatización -->
+                <div class="project-card group bg-cyber-gray border border-cyber-cyan/30 rounded-xl overflow-hidden hover:border-cyber-cyan transition-all duration-300 hover:transform hover:scale-105">
+                    <div class="h-48 bg-gradient-to-br from-cyber-cyan/20 to-cyber-green/20 flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMwMGZmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIj48cGF0aCBkPSJNMjAgMjBoMnYyaC0yem0wLTRoMnYyaC0yem0wIDhoMnYyaC0yeiIvPjwvZz48L2c+PC9zdmc+')] opacity-30"></div>
+                        <i data-lucide="terminal" class="w-16 h-16 text-cyber-cyan group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="px-2 py-1 bg-cyber-cyan/10 text-cyber-cyan text-xs rounded-full font-mono">Python</span>
+                            <span class="px-2 py-1 bg-cyber-green/10 text-cyber-green text-xs rounded-full font-mono">Automation</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-2 group-hover:text-cyber-cyan transition-colors">Scripts de Automatización</h3>
+                        <p class="text-gray-400 text-sm">Colección de scripts en Python para automatización de tareas y procesamiento de datos.</p>
+                    </div>
+                </div>
+                
+                <!-- Consultas SQL -->
+                <div class="project-card group bg-cyber-gray border border-cyber-green/30 rounded-xl overflow-hidden hover:border-cyber-green transition-all duration-300 hover:transform hover:scale-105">
+                    <div class="h-48 bg-gradient-to-br from-cyber-green/20 to-cyber-blue/20 flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMwMGZmODgiIGZpbGwtb3BhY2l0eT0iMC4xIj48cGF0aCBkPSJNMjAgMjBoMnYyaC0yem0wLTRoMnYyaC0yem0wIDhoMnYyaC0yeiIvPjwvZz48L2c+PC9zdmc+')] opacity-30"></div>
+                        <i data-lucide="table" class="w-16 h-16 text-cyber-green group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="px-2 py-1 bg-cyber-green/10 text-cyber-green text-xs rounded-full font-mono">SQL</span>
+                            <span class="px-2 py-1 bg-cyber-blue/10 text-cyber-blue text-xs rounded-full font-mono">Database</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-2 group-hover:text-cyber-green transition-colors">Consultas SQL</h3>
+                        <p class="text-gray-400 text-sm">Repositorio de consultas SQL complejas para análisis y manipulación de datos.</p>
+                    </div>
+                </div>
+                
+                <!-- Más Proyectos -->
+                <a href="https://github.com/elbarto548" target="_blank" class="project-card group bg-cyber-gray border border-gray-700 rounded-xl overflow-hidden hover:border-cyber-green transition-all duration-300 hover:transform hover:scale-105 flex items-center justify-center min-h-[300px]">
+                    <div class="text-center">
+                        <i data-lucide="github" class="w-16 h-16 text-gray-400 group-hover:text-cyber-green transition-colors mx-auto mb-4"></i>
+                        <h3 class="text-xl font-semibold text-white group-hover:text-cyber-green transition-colors">Ver más en GitHub</h3>
+                        <p class="text-gray-400 text-sm mt-2">Explora todos mis repositorios</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold mb-4">
+                    <span class="text-cyber-green">&lt;</span> Contacto <span class="text-cyber-green">/&gt;</span>
+                </h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-cyber-green to-cyber-blue mx-auto"></div>
+            </div>
+            
+            <div class="max-w-3xl mx-auto">
+                <div class="bg-cyber-dark border border-cyber-green/30 rounded-2xl p-8 relative overflow-hidden">
+                    <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyber-green to-cyber-corporate"></div>
+                    
+                    <h3 class="text-2xl font-semibold text-white mb-6 flex items-center gap-2">
+                        <i data-lucide="send" class="w-6 h-6 text-cyber-green"></i>
+                        Envíame un mensaje
+                    </h3>
+                    
+                    <form id="contact-form" action="https://formspree.io/f/mwvzonny" method="POST" class="space-y-6">
+                        <div class="grid sm:grid-cols-2 gap-6">
+                            <div>
+                                <label for="name" class="block text-gray-400 text-sm mb-2 font-mono">Nombre</label>
+                                <input type="text" id="name" name="name" required class="w-full bg-cyber-gray border border-cyber-green/30 rounded-lg px-4 py-3 text-white focus:border-cyber-green focus:ring-1 focus:ring-cyber-green outline-none transition-all duration-300" placeholder="Tu nombre">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-gray-400 text-sm mb-2 font-mono">Email</label>
+                                <input type="email" id="email" name="email" required class="w-full bg-cyber-gray border border-cyber-green/30 rounded-lg px-4 py-3 text-white focus:border-cyber-green focus:ring-1 focus:ring-cyber-green outline-none transition-all duration-300" placeholder="tu@email.com">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="message" class="block text-gray-400 text-sm mb-2 font-mono">Mensaje</label>
+                            <textarea id="message" name="message" rows="5" required class="w-full bg-cyber-gray border border-cyber-green/30 rounded-lg px-4 py-3 text-white focus:border-cyber-green focus:ring-1 focus:ring-cyber-green outline-none transition-all duration-300 resize-none" placeholder="Escribe tu mensaje aquí..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full sm:w-auto px-8 py-3 bg-gradient-to-r from-cyber-green to-cyber-corporate text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-cyber-green/30 transition-all duration-300 flex items-center justify-center gap-2 group">
+                            <span>Enviar Mensaje</span>
+                            <i data-lucide="send" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+                        </button>
+                    </form>
+                    
+                  
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer with Server Status Widget -->
+    <footer class="bg-cyber-darker/95 border-t border-cyber-green py-6 font-mono">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:grid lg:grid-cols-3 items-center gap-6">
+                <!-- Copyright and Brand -->
+                <div class="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left lg:text-left">
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="shield-check" class="w-5 h-5 text-cyber-green"></i>
+                        <span class="text-white font-semibold text-sm"></span>
+                    </div>
+                    <p class="text-gray-500 text-xs">
+                        © 2026. Todos los derechos reservados.
+                    </p>
+                </div>
+                
+                <!-- Server Status Widget (Integrated) -->
+                <div id="server-widget" class="bg-cyber-dark/80 border border-cyber-green/30 rounded-lg p-3 shadow-lg shadow-cyber-green/10">
+                    <div class="flex items-center gap-2 mb-2">
+                        <div class="w-2 h-2 bg-cyber-green rounded-full animate-pulse"></div>
+                        <span class="text-cyber-green text-xs font-semibold">SERVER STATUS: ONLINE</span>
+                    </div>
+                    <div class="grid grid-cols-3 gap-3 text-xs">
+                        <div class="flex flex-col items-center">
+                            <span class="text-gray-500 text-[10px]">CPU</span>
+                            <span id="cpu-usage" class="text-cyber-green font-semibold">--%</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <span class="text-gray-500 text-[10px]">RAM</span>
+                            <span id="ram-usage" class="text-cyber-blue font-semibold">--%</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <span class="text-gray-500 text-[10px]">NET</span>
+                            <span id="network-load" class="text-cyber-purple font-semibold">--</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Social Links -->
+                <div class="flex items-center gap-3 justify-center lg:justify-end">
+                    <a href="https://github.com/elbarto548" target="_blank" class="w-10 h-10 flex items-center justify-center border border-cyber-green/30 rounded-lg hover:border-cyber-green hover:bg-cyber-green/10 transition-all duration-300 group">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-gray-400 group-hover:text-cyber-green transition-colors">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.facebook.com/share/1BZAwXmEfd/" target="_blank" class="w-10 h-10 flex items-center justify-center border border-cyber-blue/30 rounded-lg hover:border-cyber-blue hover:bg-cyber-blue/10 transition-all duration-300 group">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-gray-400 group-hover:text-cyber-blue transition-colors">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.instagram.com/el_barto548?igsh=MW41aXZtOTU5M2p3Yw==" target="_blank" class="w-10 h-10 flex items-center justify-center border border-cyber-purple/30 rounded-lg hover:border-cyber-purple hover:bg-cyber-purple/10 transition-all duration-300 group">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-gray-400 group-hover:text-cyber-purple transition-colors">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
