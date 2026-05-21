@@ -23,7 +23,7 @@ El proyecto está construido desde cero, cuidando el rendimiento, la semántica 
 
 Este código cuenta con cabeceras de firma digital y control de derechos de autor.
 
-* **Autor:** Benjamin Ticona Mamani
+* **Autor:** Benjamin Ticona
 * **Organización:** btm-sys
 * **Permisos:** Permitida la auditoría y visualización para fines de reclutamiento y educativos. Prohibida la redistribución o copia no autorizada del núcleo lógico de componentes sin la debida atribución.
 
