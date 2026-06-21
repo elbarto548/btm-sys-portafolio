@@ -2,14 +2,14 @@
 <!--
 /**
  * =================================================================
- * PORTFOLIO ARCHITECTURE & CORE LOGIC
+ * ARQUITECTURA DEL PORTAFOLIO Y LÓGICA CENTRAL
  * =================================================================
- * Copyright (c) 2026 Benjamin Ticona Mamani. All rights reserved.
- * Verified Owner: btm-sys
- * * NOTICE: Permission is hereby granted to view and audit this code 
- * for educational and recruitment purposes. Unauthorized distribution, 
- * modification for commercial use, or replication of this source code 
- * without credit to the original author is strictly prohibited.
+ * Copyright (c) 2026 Benjamin Ticona Mamani. Todos los derechos reservados.
+ * Propietario Verificado: btm-sys
+ * * AVISO: Se otorga permiso para ver y auditar este código 
+ * con fines educativos y de reclutamiento. La distribución no autorizada, 
+ * modificación para uso comercial, o replicación de este código fuente 
+ * sin crédito al autor original está estrictamente prohibida.
  * =================================================================
  */
 -->
@@ -23,10 +23,10 @@
     <!-- Tailwind CSS via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Lucide Icons -->
+    <!-- Lucide Iconos -->
     <script src="https://unpkg.com/lucide@latest"></script>
     
-    <!-- Custom Tailwind Configuration -->
+    <!-- Custom Tailwind Configuracion -->
     <script>
         tailwind.config = {
             theme: {
@@ -68,10 +68,10 @@
         }
     </script>
     
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="styles.css">
+   
+    <link rel="stylesheet" href="css/styles.css">
     
-    <!-- DM Sans Font -->
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -88,7 +88,7 @@
         </div>
     </div>
     
-    <!-- Toast Notification -->
+    <!-- Toast Notificacion -->
     <div id="toast" class="fixed top-20 right-5 z-[9999] hidden opacity-0 pointer-events-none translate-x-full transition-all duration-500">
         <div class="bg-[#0b0f19] border border-cyber-green rounded-lg px-5 py-4 shadow-lg shadow-cyber-green/30 flex items-center gap-3" style="min-width: 300px;">
             <i data-lucide="check-circle" class="w-6 h-6 text-cyber-green"></i>
@@ -109,7 +109,7 @@
                     <div class="w-2 h-2 bg-cyber-green rounded-full animate-pulse"></div>
                 </a>
                 
-                <!-- Desktop Menu -->
+                <!-- Menu Escritorio -->
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="#about" class="nav-link text-gray-300 hover:text-cyber-green transition-colors">Sobre mí</a>
                     <a href="#skills" class="nav-link text-gray-300 hover:text-cyber-green transition-colors">Skills</a>
@@ -120,14 +120,14 @@
                     </a>
                 </div>
                 
-                <!-- Mobile Menu Button -->
+                <!-- Movil Menu Button -->
                 <button id="mobile-menu-btn" class="md:hidden p-2 text-gray-300 hover:text-cyber-green transition-colors">
                     <i data-lucide="menu" class="w-6 h-6"></i>
                 </button>
             </div>
         </div>
         
-        <!-- Mobile Menu -->
+        <!-- Movil Menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-cyber-dark border-t border-cyber-green/20">
             <div class="px-4 py-4 space-y-3">
                 <a href="#about" class="block text-gray-300 hover:text-cyber-green transition-colors py-2">Sobre mí</a>
@@ -143,7 +143,7 @@
 
     <!-- Hero Section -->
     <section id="hero" class="min-h-screen flex items-center justify-center relative overflow-hidden pt-16">
-        <!-- Animated Background -->
+        <!-- Background Animado-->
         <div class="absolute inset-0 bg-gradient-to-br from-cyber-black via-cyber-dark to-cyber-darker"></div>
         <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMwMGZmODgiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PHBhdGggZD0iTTM2IDM0djItaDJ2LTJoLTJ6bTAgNHYyaDJ2LTJoLTJ6bS0yLTR2Mmgydi0yaC0yem0wIDR2Mmgydi0yaC0yeiIvPjwvZz48L2c+PC9zdmc+')] opacity-20"></div>
         <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-cyber-green/10 rounded-full blur-3xl animate-pulse-slow"></div>
@@ -153,7 +153,7 @@
             <div class="mb-6 animate-float">
                 <div class="inline-flex items-center justify-center w-32 h-32 rounded-full bg-gradient-to-br from-cyber-green to-cyber-corporate p-[3px] hover:p-[4px] transition-all duration-300 avatar-frame">
                     <div class="w-full h-full rounded-full bg-cyber-dark flex items-center justify-center overflow-hidden">
-                        <img src="avatar.png" alt="Benjamin Avatar" class="w-full h-full object-cover">
+                        <img src="assets/images/avatar.png" alt="Benjamin Avatar" class="w-full h-full object-cover">
                     </div>
                 </div>
             </div>
@@ -178,7 +178,7 @@
                     Ver Proyectos
                     <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
                 </a>
-                <a href="CV_Benjamin_Ticona.pdf" target="_blank" class="px-8 py-3 border border-cyber-corporate text-cyber-corporate rounded-lg hover:bg-cyber-corporate/10 transition-all duration-300 flex items-center gap-2">
+                <a href="assets/docs/CV_Benjamin_Ticona.pdf" target="_blank" class="px-8 py-3 border border-cyber-corporate text-cyber-corporate rounded-lg hover:bg-cyber-corporate/10 transition-all duration-300 flex items-center gap-2">
                     <i data-lucide="download" class="w-5 h-5"></i>
                     Descargar CV
                 </a>
@@ -193,7 +193,7 @@
         </div>
     </section>
 
-    <!-- About Section -->
+    <!-- Sobre mi Sección -->
     <section id="about" class="py-20 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
@@ -268,7 +268,7 @@
         </div>
     </section>
 
-    <!-- Skills Section -->
+    <!-- Skills Sección -->
     <section id="skills" class="py-20 bg-cyber-dark relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
@@ -338,7 +338,7 @@
         </div>
     </section>
 
-    <!-- Certifications Section -->
+    <!-- Certificaciones Sección -->
     <section id="certifications" class="py-20 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
@@ -348,7 +348,7 @@
                 <div class="w-24 h-1 bg-gradient-to-r from-cyber-green to-cyber-blue mx-auto"></div>
             </div>
             
-            <!-- Anthropic Certifications -->
+            <!-- Certificación Anthropic -->
             <div class="mb-12">
                 <h3 class="text-2xl font-semibold text-cyber-green mb-6 flex items-center gap-2">
                     <i data-lucide="brain-circuit" class="w-6 h-6"></i>
@@ -417,7 +417,7 @@
                 </div>
             </div>
             
-            <!-- Cisco Certification -->
+            <!-- Cisco Certificacion -->
             <div class="mb-12">
                 <h3 class="text-2xl font-semibold text-cyber-blue mb-6 flex items-center gap-2">
                     <i data-lucide="network" class="w-6 h-6"></i>
@@ -473,7 +473,7 @@
         </div>
     </section>
 
-    <!-- Projects Section -->
+    <!-- Proyectos Seccion -->
     <section id="projects" class="py-20 bg-cyber-dark relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
@@ -576,7 +576,7 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
+    <!-- Contacto Seccion -->
     <section id="contact" class="py-20 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
@@ -622,11 +622,11 @@
         </div>
     </section>
 
-    <!-- Footer with Server Status Widget -->
+    <!-- Footer con Server Status Widget -->
     <footer class="bg-cyber-darker/95 border-t border-cyber-green py-6 font-mono">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col lg:grid lg:grid-cols-3 items-center gap-6">
-                <!-- Copyright and Brand -->
+                <!-- Copyright -->
                 <div class="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left lg:text-left">
                     <div class="flex items-center gap-2">
                         <i data-lucide="shield-check" class="w-5 h-5 text-cyber-green"></i>
@@ -637,7 +637,7 @@
                     </p>
                 </div>
                 
-                <!-- Server Status Widget (Integrated) -->
+                <!-- Server Status Widget (Integrado) -->
                 <div id="server-widget" class="bg-cyber-dark/80 border border-cyber-green/30 rounded-lg p-3 shadow-lg shadow-cyber-green/10">
                     <div class="flex items-center gap-2 mb-2">
                         <div class="w-2 h-2 bg-cyber-green rounded-full animate-pulse"></div>
@@ -682,6 +682,6 @@
     </footer>
 
     <!-- JavaScript -->
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>

@@ -1,9 +1,9 @@
 /**
  * =================================================================
- * PORTFOLIO CYBERSECURITY INTERFACE STYLES (UI/UX)
+ * ESTILOS DE INTERFAZ DE CIBERSEGURIDAD DEL PORTAFOLIO (UI/UX)
  * =================================================================
- * Copyright (c) 2026 Benjamin Ticona Mamani. All rights reserved.
- * Verified Owner: btm-sys
+ * Copyright (c) 2026 Benjamin Ticona Mamani. Todos los derechos reservados.
+ * Propietario Verificado: btm-sys
  * =================================================================
  */
 
@@ -32,7 +32,7 @@ body {
     line-height: 1.6;
 }
 
-/* Custom Scrollbar */
+/* Barra de desplazamiento personalizada */     
 ::-webkit-scrollbar {
     width: 8px;
 }
@@ -57,7 +57,7 @@ body {
 }
 
 /* ============================================
-   ANIMATIONS
+   ANIMATICIONES
    ============================================ */
 
 @keyframes fadeInUp {
@@ -129,7 +129,7 @@ body {
     }
 }
 
-/* Animation Classes */
+/* Animacion Classes */
 .animate-on-scroll {
     opacity: 0;
     transform: translateY(30px);
@@ -164,7 +164,7 @@ body {
 }
 
 /* ============================================
-   NAVBAR STYLES
+   NAVBAR ESTILOS
    ============================================ */
 
 .navbar-scrolled {
@@ -192,7 +192,7 @@ body {
 }
 
 /* ============================================
-   HERO SECTION
+   HERO SECCION
    ============================================ */
 
 .hero-gradient {
@@ -243,7 +243,7 @@ body {
     }
 }
 
-/* Radial Background Gradients */
+/* Gradientes de fondo radiales */
 .radial-gradient-bg {
     background: 
         radial-gradient(circle at 20% 80%, rgba(0, 255, 136, 0.08) 0%, transparent 50%),
@@ -306,7 +306,7 @@ body {
 }
 
 /* ============================================
-   CARD STYLES
+   TARJETA ESTILOS
    ============================================ */
 
 .skill-card,
@@ -343,7 +343,7 @@ body {
     left: 100%;
 }
 
-/* Card Glow Effect */
+
 .skill-card:hover,
 .cert-card:hover,
 .project-card:hover,
@@ -352,7 +352,7 @@ body {
                 0 0 60px rgba(30, 64, 175, 0.1);
 }
 
-/* Microanimations for Cards */
+
 .skill-card,
 .cert-card,
 .project-card {
@@ -365,7 +365,7 @@ body {
     transform: translateY(-8px) scale(1.03);
 }
 
-/* Neon Border Animation on Cards */
+
 .skill-card::after,
 .cert-card::after,
 .project-card::after {
@@ -403,7 +403,7 @@ body {
 }
 
 /* ============================================
-   BUTTON STYLES
+   BOTON ESTILOS
    ============================================ */
 
 .btn-primary {
@@ -429,7 +429,7 @@ body {
 }
 
 /* ============================================
-   SECTION DIVIDERS
+   SECCION DIVISORES
    ============================================ */
 
 .section-divider {
@@ -444,7 +444,7 @@ body {
 }
 
 /* ============================================
-   RESPONSIVE STYLES
+   RESPONSIVE ESTILOS
    ============================================ */
 
 @media (max-width: 768px) {
@@ -456,7 +456,7 @@ body {
         font-size: 1.25rem;
     }
     
-    /* Mobile Menu Animation */
+    
     #mobile-menu {
         animation: slideDown 0.3s ease-out;
     }
@@ -474,7 +474,7 @@ body {
 }
 
 /* ============================================
-   UTILITY CLASSES
+   CLASES DE UTILIDAD
    ============================================ */
 
 .text-gradient {
@@ -504,7 +504,7 @@ body {
     box-shadow: 0 0 20px rgba(30, 64, 175, 0.3);
 }
 
-/* Contact Form Styles */
+/* Formularios de contacto */
 #contact-form input,
 #contact-form textarea {
     background-color: rgba(0, 0, 0, 0.5);
@@ -554,7 +554,7 @@ body {
 }
 
 /* ============================================
-   TOAST NOTIFICATION STYLES
+   NOTIFICACIONES TOAST ESTILOS
    ============================================ */
 
 #toast {
@@ -585,7 +585,7 @@ body {
 }
 
 /* ============================================
-   PRELOADER STYLES
+   PRELOADER ESTILOS
    ============================================ */
 
 #preloader {
@@ -607,45 +607,45 @@ body {
 }
 
 /* ============================================
-   SERVER STATUS POWER FAILURE EFFECT
+   EFECTO DE FALLA DE ENERGÍA DEL ESTADO DEL SERVIDOR
    ============================================ */
 
-/* Server offline state - gray colors, no hiding */
+
 #server-widget.server-offline {
     border-color: #555555;
     box-shadow: none;
     transition: none !important;
 }
 
-/* Change all internal colors to gray when offline */
+
 #server-widget.server-offline * {
     color: #555555 !important;
     transition: none !important;
 }
 
-/* Specifically target the LED indicator - turn gray and stop pulsing */
+
 #server-widget.server-offline .w-2.h-2.bg-cyber-green.rounded-full.animate-pulse {
     background-color: #555555 !important;
     animation: none !important;
 }
 
-/* Glitch active state - rapid flicker */
+
 #server-widget.glitch-active {
     transition: none !important;
 }
 
-/* Flicker low opacity */
+
 #server-widget.glitch-low {
     opacity: 0.2;
 }
 
-/* Flicker high opacity */
+
 #server-widget.glitch-high {
     opacity: 1.0;
 }
 
 /* ============================================
-   LOADING ANIMATION
+   ANIMACION DE CARGA
    ============================================ */
 
 .loading-overlay {
@@ -682,9 +682,6 @@ body {
     }
 }
 
-/* ============================================
-   PRINT STYLES
-   ============================================ */
 
 @media print {
     body {
@@ -705,7 +702,7 @@ body {
 }
 
 /* ============================================
-   ACCESSIBILITY
+   ACCESIBILIDAD
    ============================================ */
 
 @media (prefers-reduced-motion: reduce) {
@@ -718,14 +715,14 @@ body {
     }
 }
 
-/* Focus Styles for Accessibility */
+
 a:focus,
 button:focus {
     outline: 2px solid #00ff88;
     outline-offset: 2px;
 }
 
-/* Skip Link for Accessibility */
+
 .skip-link {
     position: absolute;
     top: -40px;
